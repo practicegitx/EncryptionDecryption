@@ -8,7 +8,8 @@ public class EncryptionDecryption {
 
         String EncryptOrDecrypt = scanner.nextLine();
         String strOriginalText = scanner.nextLine();
-        int key = scanner.nextInt();
+        String strKey = scanner.nextLine();
+        int key = Integer.parseInt(strKey);
         char [] arrToEncrypt = strOriginalText.toCharArray();
 
         switch (EncryptOrDecrypt)
@@ -29,11 +30,9 @@ public class EncryptionDecryption {
         int res = 0;
         for (int i = 0; i < arrToEncrypt.length; i++)
         {
-            if ( arrToEncrypt[i] >= 'A' && arrToEncrypt[i] <= 'Z' )
-            {
-                if (arrToEncrypt[i] + key > 90)
+                if (arrToEncrypt[i] + key > 127)
                 {
-                    res = arrToEncrypt[i] + key - 90 + 64;
+                    res = arrToEncrypt[i] + key - 127;
                     arrToEncrypt[i] = (char)res;
                 }
                 else
@@ -41,22 +40,6 @@ public class EncryptionDecryption {
                     res = arrToEncrypt[i] + key;
                     arrToEncrypt[i] = (char)res;
                 }
-            }
-
-            else if (arrToEncrypt[i] >= 'a' && arrToEncrypt[i] <= 'z')
-            {
-                if (arrToEncrypt[i] + key > 122)
-                {
-                    res = arrToEncrypt[i] + key - 122 + 96;
-                    arrToEncrypt[i] = (char)res;
-                }
-                else
-                {
-                    res = arrToEncrypt[i] + key;
-                    arrToEncrypt[i] = (char)res;
-                }
-
-            }
         }
         for (char cypherText : arrToEncrypt)
             System.out.print(cypherText);
@@ -68,12 +51,9 @@ public class EncryptionDecryption {
         int res = 0;
         for (int i = 0; i < arrToDecrypt.length; i++)
         {
-            if ( arrToDecrypt[i] >= 'A' && arrToDecrypt[i] <= 'Z' )
-            {
-
-                if (arrToDecrypt[i] - key < 65)
+                if (arrToDecrypt[i] - key < 0)
                 {
-                    res = arrToDecrypt[i] - key - 64 + 90 ;
+                    res = arrToDecrypt[i] - key + 127 ;
                     arrToDecrypt[i] = (char)res;
                 }
                 else
@@ -81,22 +61,6 @@ public class EncryptionDecryption {
                     res = arrToDecrypt[i] - key;
                     arrToDecrypt[i] = (char)res;
                 }
-            }
-
-            else if (arrToDecrypt[i] >= 'a' && arrToDecrypt[i] <= 'z')
-            {
-                if (arrToDecrypt[i] - key < 97)
-                {
-                    res = arrToDecrypt[i] - key + 122 - 96;
-                    arrToDecrypt[i] = (char)res;
-                }
-                else
-                {
-                    res = arrToDecrypt[i] - key;
-                    arrToDecrypt[i] = (char)res;
-                }
-
-            }
         }
         for (char decypherText : arrToDecrypt)
             System.out.print(decypherText);
