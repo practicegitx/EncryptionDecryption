@@ -4,13 +4,27 @@ public class EncryptionDecryption {
     // A - Z = 65 - 90, a - z = 97 - 122
     public static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
 
-        String EncryptOrDecrypt = scanner.nextLine();
-        String strOriginalText = scanner.nextLine();
-        String strKey = scanner.nextLine();
+    public static void main(String[] args) {
+        String EncryptOrDecrypt = "enc";
+        String strOriginalText = null;
+        String strKey = null;
+
+        for (int i = 0; i < args.length; i++)
+        {
+            if (args[i].equals("-mode"))
+                EncryptOrDecrypt = args[i + 1];
+
+            else if (args[i].equals("-key"))
+                strKey = args[i + 1];
+
+            else if (args[i].equals("-data"))
+                strOriginalText = args[i + 1];
+        }
+
         int key = Integer.parseInt(strKey);
         char [] arrToEncrypt = strOriginalText.toCharArray();
+
 
         switch (EncryptOrDecrypt)
         {
